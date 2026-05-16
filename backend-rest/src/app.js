@@ -4,6 +4,21 @@ const registerRoutes = require("./routes/index");
 const errorHandler = require("./middleware/errorHandler");
 fastify.register(require("@fastify/cors"), {
   origin: "*",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+});
+
+fastify.register(require("@fastify/swagger"), {
+  openapi: {
+    info: {
+      title: "Todo App API",
+      description: "API documentation for Industrix Todo App",
+      version: "1.0.0",
+    },
+  },
+});
+// Swagger UI - bisa diakses di browser
+fastify.register(require("@fastify/swagger-ui"), {
+  routePrefix: "/documentation",
 });
 fastify.register(registerRoutes);
 

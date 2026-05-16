@@ -27,7 +27,7 @@ const updateTodoSchema = {
       completed: { type: "boolean" },
       priority: { type: "string", enum: ["high", "medium", "low"] },
       category_id: { type: "string", format: "uuid" },
-      due_date: { type: "string", format: "date-time" },
+      due_date: { type: ["string", "null"], format: "date-time" },
     },
   },
 };

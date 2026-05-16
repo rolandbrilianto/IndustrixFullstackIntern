@@ -10,37 +10,50 @@ const todoRoutes = async (fastify) => {
   fastify.get(
     "/",
     {
-      schema: getTodosSchema,
+      schema: { tags: ["Todos"], ...getTodosSchema },
     },
     todoController.getAllTodos,
   );
 
-  // GET /api/todos/:id - ambil satu todo
-  fastify.get("/:id", todoController.getTodoById);
+  fastify.get(
+    "/:id",
+    {
+      schema: { tags: ["Todos"] },
+    },
+    todoController.getTodoById,
+  );
 
-  // POST /api/todos - buat todo baru
   fastify.post(
     "/",
     {
-      schema: createTodoSchema,
+      schema: { tags: ["Todos"], ...createTodoSchema },
     },
     todoController.createTodo,
   );
 
-  // PUT /api/todos/:id - update todo
   fastify.put(
     "/:id",
     {
-      schema: updateTodoSchema,
+      schema: { tags: ["Todos"], ...updateTodoSchema },
     },
     todoController.updateTodo,
   );
 
-  // DELETE /api/todos/:id - hapus todo
-  fastify.delete("/:id", todoController.deleteTodo);
+  fastify.delete(
+    "/:id",
+    {
+      schema: { tags: ["Todos"] },
+    },
+    todoController.deleteTodo,
+  );
 
-  // PATCH /api/todos/:id/complete - toggle status completed
-  fastify.patch("/:id/complete", todoController.toggleTodo);
+  fastify.patch(
+    "/:id/complete",
+    {
+      schema: { tags: ["Todos"] },
+    },
+    todoController.toggleTodo,
+  );
 };
 
 module.exports = todoRoutes;

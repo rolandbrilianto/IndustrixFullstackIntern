@@ -6,13 +6,17 @@ const {
 
 const categoryRoutes = async (fastify) => {
   // GET /api/categories - ambil semua kategori
-  fastify.get("/", categoryController.getAllCategories);
+  fastify.get(
+    "/",
+    { schema: { tags: ["Categories"] } },
+    categoryController.getAllCategories,
+  );
 
   // POST /api/categories - buat kategori baru
   fastify.post(
     "/",
     {
-      schema: createCategorySchema,
+      schema: { tags: ["Categories"], ...createCategorySchema },
     },
     categoryController.createCategory,
   );
@@ -21,13 +25,17 @@ const categoryRoutes = async (fastify) => {
   fastify.put(
     "/:id",
     {
-      schema: updateCategorySchema,
+      schema: { tags: ["Categories"], ...updateCategorySchema },
     },
     categoryController.updateCategory,
   );
 
   // DELETE /api/categories/:id - hapus kategori
-  fastify.delete("/:id", categoryController.deleteCategory);
+  fastify.delete(
+    "/:id",
+    { schema: { tags: ["Categories"] } },
+    categoryController.deleteCategory,
+  );
 };
 
 module.exports = categoryRoutes;
