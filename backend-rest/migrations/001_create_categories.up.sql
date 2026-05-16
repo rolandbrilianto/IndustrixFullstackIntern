@@ -1,0 +1,11 @@
+CREATE EXTENSION IF NOT EXISTS "pgcrypto"
+
+CREATE TABLE categories(
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  
+    name VARCHAR(100) NOT NULL,
+ 
+    color VARCHAR(7) NOT NULL DEFAULT '#6B7280',
+ 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
